@@ -1,0 +1,40 @@
+.text-enter {
+    position: absolute;
+    top: 440px;;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center; 
+    color: rgb(1,252,255, 0.8);
+}
+
+.play-btn {
+    width: 100px;
+    height: 100px;
+    background: radial-gradient( rgba(1,252,255, 0.8) 60%, rgba(255, 255, 255, 1) 62%);
+    border-radius: 50%;
+    position: absolute;
+    top: 220px;;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: block;
+    margin: 100px auto;
+    box-shadow: 0px 0px 25px 3px rgba(1,252,255, 0.8);
+  }
+  
+.play-btn::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translateX(-40%) translateY(-50%);
+    transform: translateX(-40%) translateY(-50%);
+    transform-origin: center center;
+    width: 0;
+    height: 0;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-left: 25px solid #fff;
+}
+  

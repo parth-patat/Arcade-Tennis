@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arcade Tennis</title>
+  <link rel="stylesheet" href="style_tennis.css">
+</head>
+
+<body>
+
+  <div class="img-container">
+    <img class="frame-img" width="1400" height="720" src="Assets/blue-gif.gif" alt="Background Image">
+  </div>
+
+  <div class="canvas-buttons-container">
+    <div class="canvas-button-container">
+      <button id="canvas-button-music">Music On/Off</button>
+    </div>
+    <div class="canvas-button-container">
+      <button id="canvas-button-exit" onclick="window.location.href='menu.html';">Exit to main menu</button>
+    </div>
+  </div>
+
+  <audio id="background-score">
+    <source src="Assets/ost.mp3" type='audio/mpeg'/>
+  </audio>
+
+</body>
+
+<canvas id="gameCanvas" width="1300" height="650"></canvas>
+
+<script src="canvas.js"></script>
+
+</html>
+
