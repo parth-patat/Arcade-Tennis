@@ -14,6 +14,7 @@ const WINNING_SCORE = 3;
 var showWinScreen = false;
 var popSound = new Audio('Assets/pop.mp3');
 
+// mouse move handling for left paddle
 function mousePosition(evt) {
     var rect = canvas.getBoundingClientRect();
     var root = document.documentElement;
@@ -25,6 +26,7 @@ function mousePosition(evt) {
     };
 }
 
+// handling mose click in the win screen
 function handleMouseClick(evt) {
     if (showWinScreen) {
         player1Score = 0;
@@ -49,7 +51,7 @@ window.onload = function () {
             var mousePos = mousePosition(evt);
             paddle_Left_Ycoordinates = mousePos.y - PADDLE_HEIGHT / 2;
         }
-    ); // for moving left paddle according to the mouse movement
+    ); // called 18-26 funtion for moving left paddle according to the mouse movement
 }
 
 function callMoveDraw() {
@@ -57,6 +59,7 @@ function callMoveDraw() {
     drawEverything();
 }
 
+// condition for when to reset the ball to the center
 function ballReset() {
     if (player1Score >= WINNING_SCORE || player2Score >= WINNING_SCORE) {
         showWinScreen = true;   
@@ -66,6 +69,7 @@ function ballReset() {
     ballY = canvas.height/2;    
 }
 
+// funtion for AI movement of the right paddle
 function moveRightPaddle() {
     paddleRightCenter = paddle_Right_Ycoordinates + (PADDLE_HEIGHT/2);
     if (ballY + 50 < paddleRightCenter) {
@@ -76,6 +80,7 @@ function moveRightPaddle() {
     }
 }
 
+// handles all the moving 2D shapes -> paddles, ball
 function moveEverything() {  
     
     if (showWinScreen) {
@@ -126,19 +131,16 @@ function helpDrawRect(xCord, yCord, width, height, rectColor) {
     canvasDraw.fillStyle = rectColor;
     canvasDraw.fillRect(xCord, yCord, width, height);
 }
-
 function helpDrawCircle(centerX, centerY, radius, circleColor) {
     canvasDraw.fillStyle = circleColor;
     canvasDraw.beginPath();
     canvasDraw.arc(centerX, centerY, radius, 0, Math.PI * 2, true);
     canvasDraw.fill();
 }
-
 function helpWrite(text, textXcord, textYcord, textColor) {
     canvasDraw.fillStyle = textColor;
     canvasDraw.fillText(text, textXcord, textYcord);
 }
-
 function helpDrawNet() {
     for(var i=0; i<canvas.height; i=i+30) {
         helpDrawRect((canvas.width/2)-1, i, 2, 15, 'white');
@@ -146,9 +148,9 @@ function helpDrawNet() {
 }
 
 function drawEverything() {
-    helpDrawRect(0, 0, canvas.width, canvas.height, "black");
+    helpDrawRect(0, 0, canvas.width, canvas.height, "black"); // main black canvas
     
-    if (showWinScreen) {
+    if (showWinScreen) {  // draws the square of the win screen
         helpDrawRect((canvas.width/3)-50, canvas.height/3, 10, 200, 'red'); //left side
         helpDrawRect((canvas.width/3)-50, canvas.height/3, 550, 10, 'red'); //top side
         helpDrawRect((canvas.width/3)-50, (canvas.height/3)+200, 550, 10, 'red'); //bottom side
@@ -156,34 +158,30 @@ function drawEverything() {
     
         canvasDraw.font = '20px Arial';
         if (player1Score >= WINNING_SCORE) {
-            helpWrite("Player 1 Won !!", canvas.width/2 - 65, canvas.height/2 - 30, "white");     
+            helpWrite("🎉Player 1 Won !!", canvas.width/2 - 65, canvas.height/2 - 30, "white");  // text for player 1    
         }
         else if (player2Score >= WINNING_SCORE) {
-            helpWrite("Computer Won !!", canvas.width/2 - 65, canvas.height/2 - 30, "white");     
+            helpWrite("🎉Player 2 Won !!", canvas.width/2 - 65, canvas.height/2 - 30, "white");  // text for player 2    
         }
         canvasDraw.font = '30px Arial';
-        helpWrite("Click here to Continue", canvas.width/3 + 90, canvas.height/2 + 20, "white");
+        helpWrite("Click here to Continue", canvas.width/3 + 90, canvas.height/2 + 20, "white");  // text for clicking
         return;
     }
     
-    helpDrawNet();
+    helpDrawNet(); 
     
-    helpDrawCircle(ballX, ballY, 10, "white");
+    helpDrawCircle(ballX, ballY, 10, "white");  // for ball
     
-    helpDrawRect(0, paddle_Left_Ycoordinates, PADDLE_THICKNESS, PADDLE_HEIGHT, "red");
-    helpDrawRect(canvas.width - PADDLE_THICKNESS, paddle_Right_Ycoordinates, PADDLE_THICKNESS, PADDLE_HEIGHT, "blue");
+    helpDrawRect(0, paddle_Left_Ycoordinates, PADDLE_THICKNESS, PADDLE_HEIGHT, "red");  // left paddle
+    helpDrawRect(canvas.width - PADDLE_THICKNESS, paddle_Right_Ycoordinates, PADDLE_THICKNESS, PADDLE_HEIGHT, "blue");  // right paddle
 
-    helpWrite(player1Score, (canvas.width/4), (canvas.height/4), "white");
-    helpWrite(player2Score, canvas.width-(canvas.width/4), (canvas.height/4), "white");
+    helpWrite(player1Score, (canvas.width/4), (canvas.height/4), "white"); // left player score
+    helpWrite(player2Score, canvas.width-(canvas.width/4), (canvas.height/4), "white");  // right player score
 }
 
+// for playing music via button
 var musicButton = document.getElementById("canvas-button-music");
-// var menuButton = document.getElementById("playButton");
 var backgroundScore = document.getElementById("background-score");
-
-// menuButton.addEventListener("click", function(){
-//     backgroundScore.play();
-// });
 
 musicButton.addEventListener("click", function(){
     backgroundScore.loop = true;
